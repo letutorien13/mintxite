@@ -7,7 +7,7 @@
 
 [**Open Nixite**](https://aspizu.github.io/nixite/)
 
-![image](public/screenshot.png)
+![image](https://github.com/aspizu/nixite/raw/main/public/screenshot.png)
 
 Nixite generates a bash script to unattendedly install all your Linux software.
 Nixite automatically configures your system and installs software using the best method available.
