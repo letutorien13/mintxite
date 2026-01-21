@@ -3,9 +3,9 @@
 > **★ Star the repo to support the project!**
 
 [![image](https://img.shields.io/github/license/aspizu/nixite)](https://github.com/aspizu/nixite/blob/main/LICENSE)
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white)](https://discord.gg/MMfMkRuhAf)
+[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white)](https://discord.gg/mKQqsJ6UtK)
 
-[**Open Nixite**](https://aspizu.github.io/nixite/)
+[**Open Nixite**](https://aspiz.uk/nixite/)
 
 ![image](https://github.com/aspizu/nixite/raw/main/public/screenshot.png)
 
