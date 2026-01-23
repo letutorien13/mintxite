@@ -1,0 +1,136 @@
+[
+    {
+        "name": "Web Browsers",
+        "packages": [
+            {"id": "firefox", "name": "Firefox"},
+            {"id": "google-chrome", "name": "Google Chrome", "default": true},
+            {"id": "ungoogled-chromium", "name": "Ungoogled Chromium"},
+            {"id": "zen-browser", "name": "Zen Browser", "default": true},
+            {"id": "brave", "name": "Brave"},
+            {"id": "tor-browser", "name": "Tor Browser"}
+        ]
+    },
+    {
+        "name": "Communication",
+        "packages": [
+            {"id": "thunderbird", "name": "Thunderbird"},
+            {"id": "discord", "name": "Discord"},
+            {"id": "vesktop", "name": "Vesktop", "default": true},
+            {"id": "zoom-desktop", "name": "Zoom"},
+            {"id": "telegram", "name": "Telegram", "default": true},
+            {"id": "slack", "name": "Slack"}
+        ]
+    },
+    {
+        "name": "Media & Entertainment",
+        "packages": [
+            {"id": "spotify", "name": "Spotify"},
+            {"id": "strawberry", "name": "Strawberry"},
+            {"id": "stremio", "name": "Stremio", "default": true},
+            {"id": "vlc", "name": "VLC Media Player"}
+        ]
+    },
+    {
+        "name": "File Sharing",
+        "packages": [
+            {"id": "nicotine-plus", "name": "Nicotine+", "default": true},
+            {"id": "localsend", "name": "LocalSend"},
+            {"id": "transmission", "name": "Transmission", "default": true}
+        ]
+    },
+    {
+        "name": "Gaming",
+        "packages": [
+            {"id": "retroarch", "name": "RetroArch", "default": true},
+            {"id": "steam", "name": "Steam"},
+            {"id": "sober", "name": "Sober"},
+            {"id": "lutris", "name": "Lutris"},
+            {"id": "prismlauncher", "name": "Prism Launcher"},
+            {"id": "heroicgameslauncher", "name": "Heroic Games Launcher"}
+        ]
+    },
+    {
+        "name": "Graphics & Design",
+        "packages": [
+            {"id": "gimp", "name": "GIMP", "default": true},
+            {"id": "inkscape", "name": "Inkscape", "default": true},
+            {"id": "krita", "name": "Krita"}
+        ]
+    },
+    {
+        "name": "Office & Productivity",
+        "packages": [
+            {"id": "libreoffice", "name": "LibreOffice"},
+            {"id": "notion", "name": "Notion"},
+            {"id": "obsidian", "name": "Obsidian"}
+        ]
+    },
+    {
+        "name": "Studio",
+        "packages": [
+            {"id": "blender", "name": "Blender", "default": true},
+            {"id": "audacity", "name": "Audacity", "default": true},
+            {"id": "easytag", "name": "Easytag"},
+            {"id": "kdenlive", "name": "Kdenlive", "default": true},
+            {"id": "soundconverter", "name": "Soundconverter"},
+            {"id": "obs", "name": "OBS Studio", "default": true},
+            {"id": "ffmpeg", "name": "FFmpeg", "default": true}
+        ]
+    },
+    {
+        "name": "Development Tools",
+        "packages": [
+            {"id": "bun", "name": "Bun", "default": true},
+            {"id": "git", "name": "Git", "default": true},
+            {"id": "helix", "name": "Helix Editor", "default": true},
+            {"id": "ruff", "name": "Ruff", "default": true},
+            {"id": "rustup", "name": "rustup", "default": true},
+            {"id": "uv", "name": "uv", "default": true},
+            {"id": "vscode", "name": "Visual Studio Code"},
+            {"id": "vscodium", "name": "VSCodium"},
+            {"id": "zed", "name": "Zed Editor", "default": true},
+            {"id": "goboscript", "name": "goboscript", "default": true},
+            {"id": "arduino-ide", "name": "Arduino IDE"}
+        ]
+    },
+    {
+        "name": "Utilities",
+        "packages": [
+            {"id": "proton-vpn", "name": "Proton VPN", "default": true},
+            {"id": "chezmoi", "name": "chezmoi", "default": true},
+            {"id": "flameshot", "name": "Flameshot"},
+            {"id": "gnome-boxes", "name": "GNOME Boxes", "default": true},
+            {"id": "timeshift", "name": "Timeshift"},
+            {"id": "btop", "name": "BTOP++"}
+        ]
+    },
+    {
+        "name": "Terminal Emulators",
+        "packages": [
+            {"id": "alacritty", "name": "Alacritty", "default": true},
+            {"id": "foot", "name": "Foot"},
+            {"id": "kitty", "name": "Kitty"},
+            {"id": "wezterm", "name": "Wezterm"},
+            {"id": "ghostty", "name": "Ghostty"},
+            {"id": "ptyxis", "name": "Ptyxis"}
+        ]
+    },
+    {
+        "name": "Shell",
+        "packages": [
+            {"id": "powershell", "name": "PowerShell"},
+            {"id": "fish", "name": "Fish Shell", "default": true},
+            {"id": "zsh", "name": "Zsh Shell"},
+            {"id": "starship", "name": "Starship Prompt"},
+            {"id": "oh-my-zsh", "name": "oh-my-zsh"}
+        ]
+    },
+    {
+        "name": "Engineering",
+        "packages": [
+            {"id": "kicad", "name": "KiCad"},
+            {"id": "freecad", "name": "FreeCAD"},
+            {"id": "gtkwave", "name": "GTK Wave"}
+        ]
+    }
+]

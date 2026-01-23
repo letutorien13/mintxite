@@ -1,5 +1,8 @@
-import * as nixite from "./nixite"
 import {saveAs} from "file-saver"
+import hljs from "highlight.js/lib/core"
+import bash from "highlight.js/lib/languages/bash"
+import * as nixite from "./nixite"
+hljs.registerLanguage("bash", bash)
 
 const installBtn = document.getElementById("install-btn") as HTMLButtonElement
 const distroSelect = document.getElementById("distro") as HTMLSelectElement
@@ -44,6 +47,8 @@ const preview = document.getElementById("preview")!
 
 function renderPreview() {
     preview.textContent = generateScript()
+    delete preview.dataset.highlighted
+    hljs.highlightElement(preview)
 }
 
 renderBadges()

@@ -1,11 +1,14 @@
 @import "tailwindcss";
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        color-scheme: dark;
-    }
+@theme {
+    --font-sans: "Figtree Variable", "sans-serif";
+    --font-mono: "Iosevka", "monospace";
+}
 
-    option {
-        background-color: black;
-    }
+:root {
+    color-scheme: dark;
+}
+
+option {
+    background-color: black;
 }

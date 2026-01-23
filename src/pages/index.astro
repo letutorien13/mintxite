@@ -1,16 +1,23 @@
 ---
+import "@fontsource-variable/figtree"
+import "@fontsource/iosevka"
+import DownloadIcon from "@lucide/astro/icons/download"
+import HeartIcon from "@lucide/astro/icons/heart"
+import categories from "../categories.json"
 import Category from "../components/Category.astro"
 import Cmd from "../components/Cmd.astro"
 import Pkg from "../components/Pkg.astro"
 import "../styles/index.css"
-const linkStyle =
-    "underline decoration-2 decoration-black/50 dark:decoration-white/50 hover:decoration-black/75 dark:hover:decoration-white/75 font-medium"
+import "../styles/hljs.css"
+
+// @ts-ignore (deprecated)
+import GithubIcon from "@lucide/astro/icons/github"
 ---
 
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="public/nixite.svg" />
+        <link rel="icon" type="image/svg+xml" href="/nixite.svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="generator" content={Astro.generator} />
         <meta
@@ -70,44 +77,29 @@ const linkStyle =
         <meta name="apple-mobile-web-app-title" content="Nixite" />
     </head>
 
-    <body class="flex flex-col dark:bg-neutral-900 dark:text-white">
+    <body class="flex flex-col bg-black">
         <div
-            class="flex flex-col px-4 border-b-neutral-200 dark:border-b-neutral-800 border-b items-center"
+            class="flex flex-col flex-wrap max-h-180 mx-auto gap-4 p-4 overflow-x-scroll"
         >
-            <div class="flex flex-col max-w-5xl p-4 gap-4">
-                <h1 class="text-3xl">Nixite</h1>
-                <p>
-                    Nixite generates a bash script to unattendedly install all your
-                    Linux software. Nixite automatically configures your system and
-                    installs software using the best method available. Nixite tries to
-                    suppress confirmation prompts.
-                </p>
-                <p>
-                    Made with ❤️ by <a
-                        class={linkStyle}
-                        href="https://github.com/aspizu"
-                        target="_blank">aspizu</a
-                    >. Star the project on <a
-                        class={linkStyle}
-                        href="https://github.com/aspizu/nixite"
-                        target="_blank">GitHub</a
-                    >. Inspired by <a
-                        class={linkStyle}
-                        href="https://ninite.com/"
-                        target="_blank">Ninite</a
-                    >, <a
-                        class={linkStyle}
-                        href="https://packagepicker.co/"
-                        target="_blank">PackagePicker.co</a
-                    >
-                </p>
-            </div>
+            {
+                categories.map((category) => (
+                    <Category name={category.name}>
+                        {category.packages.map((pkg) => (
+                            <Pkg id={pkg.id} name={pkg.name} default={pkg.default} />
+                        ))}
+                    </Category>
+                ))
+            }
         </div>
-        <div class="flex pl-4 pt-4">
-            <label class="text-xs font-medium flex flex-col mr-auto gap-1">
-                Distribution
+        <div class="relative flex flex-col max-w-5xl mx-auto gap-2">
+            <div
+                id="fade"
+                class="absolute top-0 left-0 right-0 bg-linear-to-b from-transparent to-black pointer-events-none"
+            >
+            </div>
+            <div class="flex items-center justify-end gap-2">
                 <select
-                    class="border text-sm font-medium rounded px-2 py-1 border-neutral-300 dark:border-neutral-700 shadow-xs"
+                    class="border-[1.5px] font-medium rounded-lg px-2 py-1 border-white/25"
                     id="distro"
                 >
                     <option value="ubuntu">Ubuntu Desktop</option>
@@ -115,165 +107,59 @@ const linkStyle =
                     <option value="fedora">Fedora Workstation</option>
                     <option value="arch">Arch Linux</option>
                 </select>
-            </label>
-        </div>
-        <div
-            class="flex flex-col flex-wrap max-h-180 w-full mr-auto gap-4 p-4 overflow-x-scroll"
-        >
-            <Category name="Web Browsers">
-                <Pkg id="firefox" name="Firefox" />
-                <Pkg id="google-chrome" name="Google Chrome" default />
-                <Pkg id="ungoogled-chromium" name="Ungoogled Chromium" />
-                <Pkg id="zen-browser" name="Zen Browser" default />
-                <Pkg id="brave" name="Brave" />
-                <Pkg id="tor-browser" name="Tor Browser" />
-            </Category>
-            <Category name="Communication">
-                <Pkg id="thunderbird" name="Thunderbird" />
-                <Pkg id="discord" name="Discord" />
-                <Pkg id="vesktop" name="Vesktop" default />
-                <Pkg id="zoom-desktop" name="Zoom" />
-                <Pkg id="telegram" name="Telegram" default />
-                <Pkg id="slack" name="Slack" />
-            </Category>
-            <Category name="Media & Entertainment">
-                <Pkg id="spotify" name="Spotify" />
-                <Pkg id="strawberry" name="Strawberry" />
-                <Pkg id="stremio" name="Stremio" default />
-                <Pkg id="vlc" name="VLC Media Player" />
-            </Category>
-            <Category name="File Sharing">
-                <Pkg id="nicotine-plus" name="Nicotine+" default />
-                <Pkg id="localsend" name="LocalSend" />
-                <Pkg id="transmission" name="Transmission" default />
-            </Category>
-            <Category name="Gaming">
-                <Pkg id="retroarch" name="RetroArch" default />
-                <Pkg id="steam" name="Steam" />
-                <Pkg id="sober" name="Sober" />
-                <Pkg id="lutris" name="Lutris" />
-                <Pkg id="prismlauncher" name="Prism Launcher" />
-                <Pkg id="heroicgameslauncher" name="Heroic Games Launcher" />
-            </Category>
-
-            <Category name="Graphics & Design">
-                <Pkg id="gimp" name="GIMP" default />
-                <Pkg id="inkscape" name="Inkscape" default />
-                <Pkg id="krita" name="Krita" />
-            </Category>
-            <Category name="Office & Productivity">
-                <Pkg id="libreoffice" name="LibreOffice" />
-                <Pkg id="notion" name="Notion" />
-                <Pkg id="obsidian" name="Obsidian" />
-            </Category>
-            <Category name="Studio">
-                <Pkg id="blender" name="Blender" default />
-                <Pkg id="audacity" name="Audacity" default />
-                <Pkg id="easytag" name="Easytag" />
-                <Pkg id="kdenlive" name="Kdenlive" default />
-                <Pkg id="soundconverter" name="Soundconverter" />
-                <Pkg id="obs" name="OBS Studio" default />
-                <Pkg id="ffmpeg" name="FFmpeg" default />
-            </Category>
-            <Category name="Development Tools">
-                <Pkg id="bun" name="Bun" default />
-                <Pkg id="git" name="Git" default />
-                <Pkg id="helix" name="Helix Editor" default />
-                <Pkg id="ruff" name="Ruff" default />
-                <Pkg id="rustup" name="rustup" default />
-                <Pkg id="uv" name="uv" default />
-                <Pkg id="vscode" name="Visual Studio Code" />
-                <Pkg id="vscodium" name="VSCodium" />
-                <Pkg id="zed" name="Zed Editor" default />
-                <Pkg id="goboscript" name="goboscript" default />
-                <Pkg id="arduino-ide" name="Arduino IDE" />
-            </Category>
-            <Category name="Utilities">
-                <Pkg id="proton-vpn" name="Proton VPN" default />
-                <Pkg id="chezmoi" name="chezmoi" default />
-                <Pkg id="flameshot" name="Flameshot" />
-                <Pkg id="gnome-boxes" name="GNOME Boxes" default />
-                <Pkg id="timeshift" name="Timeshift" />
-                <Pkg id="btop" name="BTOP++" />
-            </Category>
-            <Category name="Terminal Emulators">
-                <Pkg id="alacritty" name="Alacritty" default />
-                <Pkg id="foot" name="Foot" />
-                <Pkg id="kitty" name="Kitty" />
-                <Pkg id="wezterm" name="Wezterm" />
-                <Pkg id="ghostty" name="Ghostty" />
-                <Pkg id="ptyxis" name="Ptyxis" />
-            </Category>
-            <Category name="Shell">
-                <Pkg id="powershell" name="PowerShell" />
-                <Pkg id="fish" name="Fish Shell" default />
-                <Pkg id="zsh" name="Zsh Shell" />
-                <Pkg id="starship" name="Starship Prompt" />
-                <Pkg id="oh-my-zsh" name="oh-my-zsh" />
-            </Category>
-            <Category name="Engineering">
-                <Pkg id="kicad" name="KiCad" />
-                <Pkg id="freecad" name="FreeCAD" />
-                <Pkg id="gtkwave" name="GTK Wave" />
-            </Category>
-        </div>
-        <div
-            class="flex flex-col px-4 border-t-neutral-200 dark:border-t-neutral-800 border-t"
-        >
-            <div class="flex flex-col max-w-5xl p-4 gap-4 w-full mx-auto">
                 <button
                     id="install-btn"
                     type="button"
-                    class="flex gap-1 bg-linear-to-b from-blue-500 to-blue-600
-                         text-white font-semibold
-                         px-5 py-2.5
-                         rounded-lg
-                         shadow-md
-                         hover:from-blue-600 hover:to-blue-700
-                         active:from-blue-700 active:to-blue-800
-                         focus:outline-none focus:ring-2 focus:ring-blue-300
-                         transition-all duration-200 ease-in-out
-                         mx-auto"
+                    class="flex items-center gap-1 px-2 py-1 bg-white hover:bg-white/90 transition-colors text-black rounded-lg"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 -960 960 960"
-                        width="24px"
-                        fill="#e3e3e3"
-                        ><path
-                            d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"
-                        ></path></svg
-                    >
-                    GET YOUR NIXITE
+                    <DownloadIcon class="size-4" />
+                    Download
                 </button>
-
-                <p class="text-center text-sm text-neutral-600 dark:text-neutral-400">
-                    Download and run <Cmd value="bash ~/Downloads/nixite.sh" /> in your terminal.
-                    Some installers may prompt for a password.
-                </p>
-
-                <div
-                    class="border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black rounded-lg border font-mono"
-                >
-                    <span
-                        class="flex gap-4 px-4 py-2 bg-neutral-200 dark:bg-neutral-800/50 items-center"
-                        >~/Downloads/nixite.sh
-                        <div
-                            class="ml-auto size-4 rounded-full bg-green-500 dark:bg-green-400"
-                        >
-                        </div>
-                        <div
-                            class="size-4 rounded-full bg-yellow-500 dark:bg-yellow-400"
-                        >
-                        </div>
-                        <div class="size-4 rounded-full bg-red-500 dark:bg-red-400">
-                        </div>
-                    </span>
-                    <pre id="preview" class="p-4 overflow-x-scroll w-full"></pre>
-                </div>
             </div>
+            <p class="text-center text-sm text-neutral-400">
+                Download and run <Cmd value="bash ~/Downloads/nixite.sh" /> in your terminal.
+                Some installers may prompt for a password.
+            </p>
+
+            <div
+                class="border-neutral-800 bg-black rounded-xl border-[1.5px] font-mono overflow-hidden"
+            >
+                <span
+                    class="font-sans text-sm flex gap-2 px-2 py-1 bg-neutral-800/50 items-center font-medium text-neutral-300"
+                    >~/Downloads/nixite.sh
+                    <div
+                        class="ml-auto size-3.5 rounded-full bg-green-500 dark:bg-green-400"
+                    >
+                    </div>
+                    <div class="size-3.5 rounded-full bg-yellow-500 dark:bg-yellow-400">
+                    </div>
+                    <div class="size-3.5 rounded-full bg-red-500 dark:bg-red-400"></div>
+                </span>
+                <pre
+                    class=""><code id="preview" class="language-bash leading-tight" /></pre>
+            </div>
+            <script src="../scripts/index.ts"></script>
         </div>
-        <script src="../scripts/index.ts"></script>
+        <footer class="p-8 flex justify-center">
+            <span class="flex items-center text-xs font-semibold gap-1 text-white/75"
+                >MADE WITH <HeartIcon class="size-3 text-pink-400" /> BY <a
+                    href="/"
+                    class="underline transition-colors hover:text-white decoration-[1.5px] underline-offset-2"
+                    >ASPIZU</a
+                ></span
+            >
+        </footer>
     </body>
+    <script>
+        const fade = document.getElementById("fade")!
+        function update() {
+            const rect = fade.getBoundingClientRect()
+            fade.style.height = `${window.innerHeight - rect.top}px`
+            const x = window.scrollY / 200
+            fade.style.opacity = `${1 - x}`
+        }
+        update()
+        window.addEventListener("resize", update)
+        window.addEventListener("scroll", update)
+    </script>
 </html>

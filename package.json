@@ -1,5 +1,5 @@
 {
-    "name": "tmp",
+    "name": "nixite",
     "type": "module",
     "version": "0.0.1",
     "scripts": {
@@ -10,15 +10,21 @@
         "fmt": "prettier -uwu ."
     },
     "dependencies": {
-        "@tailwindcss/vite": "^4.1.13",
-        "astro": "^5.13.6",
+        "@astrojs/prism": "^3.3.0",
+        "@fontsource-variable/figtree": "^5.2.10",
+        "@fontsource/iosevka": "^5.2.5",
+        "@lucide/astro": "^0.562.0",
+        "@tailwindcss/vite": "^4.1.18",
+        "astro": "^5.16.14",
         "file-saver": "^2.0.5",
-        "tailwindcss": "^4.1.13"
+        "highlight.js": "^11.11.1",
+        "tailwindcss": "^4.1.18"
     },
     "devDependencies": {
-        "@types/bun": "^1.2.21",
+        "@types/bun": "^1.3.6",
         "@types/file-saver": "^2.0.7",
-        "prettier": "^3.6.2",
+        "@types/highlight.js": "^10.1.0",
+        "prettier": "^3.8.1",
         "prettier-plugin-tailwindcss": "^0.6.14"
     }
 }

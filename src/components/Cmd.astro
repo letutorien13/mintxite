@@ -1,9 +1,15 @@
 ---
 interface Props {
-  value: string
+    value: string
 }
 const {value} = Astro.props
 ---
-<input class="inline-flex font-mono text-black dark:text-white font-semibold" style={{
-    width: `${value.length}ch`
-}} readonly value={value}>
+
+<input
+    class="inline-flex font-mono text-white font-semibold"
+    style={{
+        width: `${value.length}ch`,
+    }}
+    readonly
+    value={value}
+/>
