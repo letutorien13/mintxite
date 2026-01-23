@@ -3,7 +3,8 @@ import Category from "../components/Category.astro"
 import Cmd from "../components/Cmd.astro"
 import Pkg from "../components/Pkg.astro"
 import "../styles/index.css"
-const linkStyle = 'underline decoration-2 decoration-black/50 dark:decoration-white/50 hover:decoration-black/75 dark:hover:decoration-white/75 font-medium'
+const linkStyle =
+    "underline decoration-2 decoration-black/50 dark:decoration-white/50 hover:decoration-black/75 dark:hover:decoration-white/75 font-medium"
 ---
 
 <html lang="en">
@@ -70,22 +71,45 @@ const linkStyle = 'underline decoration-2 decoration-black/50 dark:decoration-wh
     </head>
 
     <body class="flex flex-col dark:bg-neutral-900 dark:text-white">
-        <div class="flex flex-col px-4 border-b-neutral-200 dark:border-b-neutral-800 border-b items-center">
-            <div class="flex flex-col max-w-[1024px] p-4 gap-4">
+        <div
+            class="flex flex-col px-4 border-b-neutral-200 dark:border-b-neutral-800 border-b items-center"
+        >
+            <div class="flex flex-col max-w-5xl p-4 gap-4">
                 <h1 class="text-3xl">Nixite</h1>
                 <p>
-                    Nixite generates a bash script to unattendedly install all your Linux software. Nixite automatically configures your system and installs software using the best method available. Nixite tries to suppress confirmation prompts.                </p>
+                    Nixite generates a bash script to unattendedly install all your
+                    Linux software. Nixite automatically configures your system and
+                    installs software using the best method available. Nixite tries to
+                    suppress confirmation prompts.
+                </p>
                 <p>
-                    Made with ❤️ by <a class={linkStyle} href="https://github.com/aspizu" target="_blank">aspizu</a>.
-                    Star the project on <a class={linkStyle} href="https://github.com/aspizu/nixite" target="_blank">GitHub</a>.
-                    Inspired by <a class={linkStyle} href="https://ninite.com/" target="_blank">Ninite</a>, <a class={linkStyle} href="https://packagepicker.co/" target="_blank">PackagePicker.co</a>
+                    Made with ❤️ by <a
+                        class={linkStyle}
+                        href="https://github.com/aspizu"
+                        target="_blank">aspizu</a
+                    >. Star the project on <a
+                        class={linkStyle}
+                        href="https://github.com/aspizu/nixite"
+                        target="_blank">GitHub</a
+                    >. Inspired by <a
+                        class={linkStyle}
+                        href="https://ninite.com/"
+                        target="_blank">Ninite</a
+                    >, <a
+                        class={linkStyle}
+                        href="https://packagepicker.co/"
+                        target="_blank">PackagePicker.co</a
+                    >
                 </p>
             </div>
         </div>
         <div class="flex pl-4 pt-4">
             <label class="text-xs font-medium flex flex-col mr-auto gap-1">
                 Distribution
-                <select class="border text-sm font-medium rounded px-2 py-1 border-neutral-300 dark:border-neutral-700 shadow-xs" id="distro">
+                <select
+                    class="border text-sm font-medium rounded px-2 py-1 border-neutral-300 dark:border-neutral-700 shadow-xs"
+                    id="distro"
+                >
                     <option value="ubuntu">Ubuntu Desktop</option>
                     <option value="debian">Debian Stable</option>
                     <option value="fedora">Fedora Workstation</option>
@@ -93,13 +117,15 @@ const linkStyle = 'underline decoration-2 decoration-black/50 dark:decoration-wh
                 </select>
             </label>
         </div>
-        <div class="flex flex-col flex-wrap max-h-[720px] w-full mr-auto gap-4 p-4 overflow-x-scroll">
+        <div
+            class="flex flex-col flex-wrap max-h-180 w-full mr-auto gap-4 p-4 overflow-x-scroll"
+        >
             <Category name="Web Browsers">
                 <Pkg id="firefox" name="Firefox" />
                 <Pkg id="google-chrome" name="Google Chrome" default />
                 <Pkg id="ungoogled-chromium" name="Ungoogled Chromium" />
                 <Pkg id="zen-browser" name="Zen Browser" default />
-                <Pkg id="brave" name="Brave"  />
+                <Pkg id="brave" name="Brave" />
                 <Pkg id="tor-browser" name="Tor Browser" />
             </Category>
             <Category name="Communication">
@@ -165,7 +191,7 @@ const linkStyle = 'underline decoration-2 decoration-black/50 dark:decoration-wh
             <Category name="Utilities">
                 <Pkg id="proton-vpn" name="Proton VPN" default />
                 <Pkg id="chezmoi" name="chezmoi" default />
-                <Pkg id="flameshot" name="Flameshot"  />
+                <Pkg id="flameshot" name="Flameshot" />
                 <Pkg id="gnome-boxes" name="GNOME Boxes" default />
                 <Pkg id="timeshift" name="Timeshift" />
                 <Pkg id="btop" name="BTOP++" />
@@ -191,12 +217,14 @@ const linkStyle = 'underline decoration-2 decoration-black/50 dark:decoration-wh
                 <Pkg id="gtkwave" name="GTK Wave" />
             </Category>
         </div>
-        <div class="flex flex-col px-4 border-t-neutral-200 dark:border-t-neutral-800 border-t">
-            <div class="flex flex-col max-w-[1024px] p-4 gap-4 w-full mx-auto">
+        <div
+            class="flex flex-col px-4 border-t-neutral-200 dark:border-t-neutral-800 border-t"
+        >
+            <div class="flex flex-col max-w-5xl p-4 gap-4 w-full mx-auto">
                 <button
-                  id="install-btn"
-                  type="button"
-                  class="flex gap-1 bg-gradient-to-b from-blue-500 to-blue-600
+                    id="install-btn"
+                    type="button"
+                    class="flex gap-1 bg-linear-to-b from-blue-500 to-blue-600
                          text-white font-semibold
                          px-5 py-2.5
                          rounded-lg
@@ -207,19 +235,40 @@ const linkStyle = 'underline decoration-2 decoration-black/50 dark:decoration-wh
                          transition-all duration-200 ease-in-out
                          mx-auto"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
-                  GET YOUR NIXITE
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="24px"
+                        viewBox="0 -960 960 960"
+                        width="24px"
+                        fill="#e3e3e3"
+                        ><path
+                            d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"
+                        ></path></svg
+                    >
+                    GET YOUR NIXITE
                 </button>
 
                 <p class="text-center text-sm text-neutral-600 dark:text-neutral-400">
-                    Download and run <Cmd value="bash ~/Downloads/nixite.sh" /> in your terminal. Some installers may prompt for a password.
+                    Download and run <Cmd value="bash ~/Downloads/nixite.sh" /> in your terminal.
+                    Some installers may prompt for a password.
                 </p>
 
-                <div class="border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black rounded-lg border font-mono">
-                    <span class="flex gap-4 px-4 py-2 bg-neutral-200 dark:bg-neutral-800/50 items-center">~/Downloads/nixite.sh
-                        <div class="ml-auto size-4 rounded-full bg-green-500 dark:bg-green-400"></div>
-                        <div class="size-4 rounded-full bg-yellow-500 dark:bg-yellow-400"></div>
-                        <div class="size-4 rounded-full bg-red-500 dark:bg-red-400"></div>
+                <div
+                    class="border-neutral-300 dark:border-neutral-800 bg-white dark:bg-black rounded-lg border font-mono"
+                >
+                    <span
+                        class="flex gap-4 px-4 py-2 bg-neutral-200 dark:bg-neutral-800/50 items-center"
+                        >~/Downloads/nixite.sh
+                        <div
+                            class="ml-auto size-4 rounded-full bg-green-500 dark:bg-green-400"
+                        >
+                        </div>
+                        <div
+                            class="size-4 rounded-full bg-yellow-500 dark:bg-yellow-400"
+                        >
+                        </div>
+                        <div class="size-4 rounded-full bg-red-500 dark:bg-red-400">
+                        </div>
                     </span>
                     <pre id="preview" class="p-4 overflow-x-scroll w-full"></pre>
                 </div>
