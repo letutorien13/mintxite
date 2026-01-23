@@ -2,94 +2,89 @@ import {saveAs} from "file-saver"
 import hljs from "highlight.js/lib/core"
 import bash from "highlight.js/lib/languages/bash"
 import * as nixite from "./nixite"
+
 hljs.registerLanguage("bash", bash)
 
-const installBtn = document.getElementById("install-btn") as HTMLButtonElement
-const distroSelect = document.getElementById("distro") as HTMLSelectElement
-installBtn.addEventListener("click", onInstallClick)
+type PkgData = {id: string; element: HTMLSpanElement; checkbox: HTMLInputElement}
 
-function renderBadges() {
-    document.querySelectorAll(".pkg-checkbox").forEach((checkbox_) => {
-        const checkbox = checkbox_ as HTMLInputElement
-        const id = checkbox.dataset.id!
-        const pkg = nixite.registry[id][distroSelect.value]
-        const badge = checkbox.parentElement!.querySelector(
-            ".Badge",
-        )! as HTMLSpanElement
-        badge.textContent = ""
-        function setColor(newColor: string) {
-            const oldColor = badge.dataset.color!
-            badge.classList.remove(oldColor)
-            badge.dataset.color = newColor
-            badge.classList.add(newColor)
-        }
-        if (
-            pkg.install_command ||
-            pkg.dependencies?.find(
-                (e) => e.startsWith("apt-") || e.startsWith("fedora-"),
-            )
-        ) {
-            badge.textContent = "3rd party"
-            setColor("bg-red-300")
-        }
-        if (pkg.snap) {
-            badge.textContent = "snap"
-            setColor("bg-yellow-300")
-        }
-        if (pkg.flatpak) {
-            badge.textContent = "flatpak"
-            setColor("bg-green-300")
-        }
-    })
+function collectPkgElements(): PkgData[] {
+    return Array.from(document.querySelectorAll(".Pkg")).map((element) => ({
+        id: (element as HTMLElement).dataset.id!,
+        element: element as HTMLSpanElement,
+        checkbox: element.querySelector('input[type="checkbox"]') as HTMLInputElement,
+    }))
 }
 
-const preview = document.getElementById("preview")!
+function getSelectedIds(): string[] {
+    return pkgElements.filter(({checkbox}) => checkbox.checked).map(({id}) => id)
+}
 
-function renderPreview() {
-    preview.textContent = generateScript()
+function getDefaultPackages(): PkgData[] {
+    return pkgElements.filter(({element}) => element.dataset.default === "true")
+}
+
+function generateScript(): string {
+    const selectedIds = getSelectedIds()
+    return nixite.createScript(distroSelect.value, selectedIds)
+}
+
+function renderPreview(): void {
+    const script = generateScript()
+    preview.textContent = script
     delete preview.dataset.highlighted
     hljs.highlightElement(preview)
 }
 
-renderBadges()
-renderPreview()
+function renderBadges(): void {
+    pkgElements.forEach(({id}) => {
+        const pkg = nixite.registry[id][distroSelect.value]
+    })
+}
 
-distroSelect.oninput = () => {
+function render(): void {
     renderBadges()
     renderPreview()
 }
 
-document.querySelectorAll(".pkg-checkbox").forEach((box) => {
-    box.addEventListener("input", () => {
-        renderPreview()
-    })
-})
-
-function generateScript(): string {
-    const selection: string[] = []
-    document.querySelectorAll(".pkg-checkbox").forEach((checkbox_) => {
-        const checkbox = checkbox_ as HTMLInputElement
-        if (checkbox.checked) {
-            selection.push(checkbox.dataset.id!)
-        }
-    })
-    const script = nixite.createScript(distroSelect.value, selection)
-    return script
-}
-
-function onInstallClick() {
+function handleInstall(): void {
     const script = generateScript()
     const blob = new Blob([script], {type: "text/plain;charset=utf-8"})
     saveAs(blob, "nixite.sh")
 }
 
-let defaults = false
-addEventListener("keyup", (event: KeyboardEvent) => {
-    if (event.key == "a") {
-        document
-            .querySelectorAll('.pkg-checkbox[data-default="true"]')
-            .forEach((box) => ((box as HTMLInputElement).checked = !defaults))
-        defaults = !defaults
-        renderPreview()
-    }
+function toggleDefaultPackages(): void {
+    const defaultPackages = getDefaultPackages()
+    const newSelectionState = !isDefaultSelected
+
+    defaultPackages.forEach(({checkbox}) => {
+        checkbox.checked = newSelectionState
+    })
+
+    isDefaultSelected = newSelectionState
+    renderPreview()
+}
+
+function handleKeyPress(event: KeyboardEvent): void {
+    if (event.key === "a") toggleDefaultPackages()
+}
+
+function handleCheckboxInput(): void {
+    renderPreview()
+}
+
+const pkgElements = collectPkgElements()
+const preview = document.getElementById("preview")!
+const distroSelect = document.getElementById("distro") as HTMLSelectElement
+const installBtn = document.getElementById("install-btn") as HTMLButtonElement
+
+let isDefaultSelected = false
+
+distroSelect.addEventListener("input", render)
+installBtn.addEventListener("click", handleInstall)
+document.addEventListener("keyup", handleKeyPress)
+
+pkgElements.forEach(({checkbox}) => {
+    checkbox.addEventListener("input", handleCheckboxInput)
 })
+
+render()

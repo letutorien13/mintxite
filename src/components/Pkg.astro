@@ -1,4 +1,6 @@
 ---
+import Checkbox from "./Checkbox.astro"
+
 interface Props {
     id: string
     name: string
@@ -8,14 +10,11 @@ const {id, name, default: isDefault} = Astro.props
 ---
 
 <label
-    class="flex items-center hover:bg-white/15 select-none transition-colors has-checked:text-white text-white/80"
+    class="Pkg flex items-center gap-2 px-2 py-1.5 hover:bg-white/10 select-none transition-colors has-checked:opacity-100 opacity-80 has-checked:bg-white/10 has-checked:hover:bg-white/20"
+    data-default={Boolean(isDefault)}
+    data-id={id}
 >
-    <input
-        class="pkg-checkbox"
-        type="checkbox"
-        data-id={id}
-        data-default={Boolean(isDefault)}
-    />
+    <Checkbox />
     <img
         src={`icons/${id}.svg`}
         width={24}
@@ -23,7 +22,6 @@ const {id, name, default: isDefault} = Astro.props
         alt={name}
         onerror="this.src = 'icons/unknown.svg'"
     />
-    {name}
-    <span class="Badge ml-auto text-sm text-gray-800 font-medium rounded-md px-1.5"
-    ></span>
+    <span class="flex-1">{name}</span>
+    {isDefault && <span class="text-xs text-white/60 mr-2">•</span>}
 </label>

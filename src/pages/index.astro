@@ -79,7 +79,7 @@ import GithubIcon from "@lucide/astro/icons/github"
 
     <body class="flex flex-col bg-black">
         <div
-            class="flex flex-col flex-wrap max-h-180 mx-auto gap-4 p-4 overflow-x-scroll"
+            class="flex flex-col flex-wrap max-h-180 mx-auto p-4 gap-4 overflow-x-scroll"
         >
             {
                 categories.map((category) => (
@@ -91,31 +91,7 @@ import GithubIcon from "@lucide/astro/icons/github"
                 ))
             }
         </div>
-        <div class="relative flex flex-col max-w-5xl mx-auto gap-2">
-            <div
-                id="fade"
-                class="absolute top-0 left-0 right-0 bg-linear-to-b from-transparent to-black pointer-events-none"
-            >
-            </div>
-            <div class="flex items-center justify-end gap-2">
-                <select
-                    class="border-[1.5px] font-medium rounded-lg px-2 py-1 border-white/25"
-                    id="distro"
-                >
-                    <option value="ubuntu">Ubuntu Desktop</option>
-                    <option value="debian">Debian Stable</option>
-                    <option value="fedora">Fedora Workstation</option>
-                    <option value="arch">Arch Linux</option>
-                </select>
-                <button
-                    id="install-btn"
-                    type="button"
-                    class="flex items-center gap-1 px-2 py-1 bg-white hover:bg-white/90 transition-colors text-black rounded-lg"
-                >
-                    <DownloadIcon class="size-4" />
-                    Download
-                </button>
-            </div>
+        <div class="relative flex flex-col w-5xl mx-auto gap-2">
             <p class="text-center text-sm text-neutral-400">
                 Download and run <Cmd value="bash ~/Downloads/nixite.sh" /> in your terminal.
                 Some installers may prompt for a password.
@@ -135,31 +111,40 @@ import GithubIcon from "@lucide/astro/icons/github"
                     </div>
                     <div class="size-3.5 rounded-full bg-red-500 dark:bg-red-400"></div>
                 </span>
-                <pre
-                    class=""><code id="preview" class="language-bash leading-tight" /></pre>
+                <pre><code id="preview" class="language-bash leading-tight" /></pre>
             </div>
-            <script src="../scripts/index.ts"></script>
         </div>
-        <footer class="p-8 flex justify-center">
-            <span class="flex items-center text-xs font-semibold gap-1 text-white/75"
-                >MADE WITH <HeartIcon class="size-3 text-pink-400" /> BY <a
-                    href="/"
-                    class="underline transition-colors hover:text-white decoration-[1.5px] underline-offset-2"
-                    >ASPIZU</a
-                ></span
+        <div
+            class="fixed bottom-0 inset-x-0 h-64 bg-linear-to-b from-transparent to-black pointer-events-none"
+        >
+        </div>
+        <div class="sticky bottom-0 inset-x-0 py-4">
+            <div
+                class="flex items-center w-4xl mx-auto border-[1.5px] border-neutral-800 shadow-xl bg-neutral-900 rounded-xl p-1 gap-1"
             >
-        </footer>
+                <span class="mr-auto text-sm font-semibold">NIXITE</span>
+                <span class="mr-auto text-sm font-semibold">A -- toggle selection</span>
+                <select
+                    class="border-[1.5px] font-medium rounded-lg px-2 py-1 bg-neutral-800 border-neutral-700"
+                    id="distro"
+                >
+                    <option value="ubuntu">Ubuntu Desktop</option>
+                    <option value="debian">Debian Stable</option>
+                    <option value="fedora">Fedora Workstation</option>
+                    <option value="arch">Arch Linux</option>
+                </select>
+                <button
+                    id="install-btn"
+                    type="button"
+                    class="flex items-center gap-1 px-2 py-1 bg-white hover:bg-white/90 transition-colors text-black rounded-lg"
+                >
+                    <DownloadIcon class="size-4" />
+                    Download
+                </button>
+            </div>
+        </div>
+        <script>
+            import "../scripts/index.ts"
+        </script>
     </body>
-    <script>
-        const fade = document.getElementById("fade")!
-        function update() {
-            const rect = fade.getBoundingClientRect()
-            fade.style.height = `${window.innerHeight - rect.top}px`
-            const x = window.scrollY / 200
-            fade.style.opacity = `${1 - x}`
-        }
-        update()
-        window.addEventListener("resize", update)
-        window.addEventListener("scroll", update)
-    </script>
 </html>
