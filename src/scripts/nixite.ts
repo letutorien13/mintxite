@@ -1,7 +1,7 @@
 import hooks_ from "../hooks.json"
 import registry_ from "../registry.json"
 
-interface Pkg {
+export interface Pkg {
     dependencies?: string[]
     install_system?: string
     install_command?: string
@@ -10,8 +10,8 @@ interface Pkg {
     snap?: "classic" | true
 }
 
-type Hooks = Record<string, string>
-type Registry = Record<string, Record<string, Pkg>>
+export type Hooks = Record<string, string>
+export type Registry = Record<string, Record<string, Pkg>>
 
 export const hooks: Hooks = hooks_ as any
 export const registry: Registry = registry_ as any

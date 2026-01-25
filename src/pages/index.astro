@@ -121,10 +121,37 @@ import GithubIcon from "@lucide/astro/icons/github"
             class="fixed bottom-0 inset-x-0 h-64 bg-linear-to-b from-transparent to-black pointer-events-none"
         >
         </div>
-        <div class="sticky bottom-0 inset-x-0 py-4">
+        <div class="sticky bottom-0 inset-x-0 flex flex-col py-4 gap-2">
+            <div class="flex w-4xl mx-auto justify-end gap-2">
+                <div
+                    id="badge-paru"
+                    class="bg-blue-400 rounded-xl flex px-2 py-1 text-sm items-center gap-1"
+                >
+                    <InfoIcon class="size-4" />
+                    paru will be installed
+                </div>
+                <div
+                    id="badge-flatpak"
+                    class="bg-green-400 rounded-xl flex px-2 py-1 text-sm items-center gap-1"
+                >
+                    <InfoIcon class="size-4" />
+                    flatpak will be installed
+                </div>
+                <div
+                    id="badge-rpmfusion"
+                    class="bg-cyan-400 rounded-xl flex px-2 py-1 text-sm items-center gap-1"
+                >
+                    <InfoIcon class="size-4" />
+                    rpmfusion will be installed
+                </div>
+            </div>
             <div
                 class="flex items-center w-4xl mx-auto border-[1.5px] border-neutral-800 shadow-xl bg-neutral-900 rounded-xl p-1 gap-1"
             >
+                <span
+                    class="font-mono bg-neutral-800 text-neutral-400 rounded-md size-6 text-center font-medium select-none ml-1"
+                    >#!</span
+                >
                 <a
                     target="_blank"
                     rel="noopener noreferrer"
