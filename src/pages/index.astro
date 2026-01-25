@@ -15,6 +15,12 @@ import "../styles/hljs.css"
 
 // @ts-ignore (deprecated)
 import GithubIcon from "@lucide/astro/icons/github"
+const art = `       .__         .__   __
+ ____  |__|___  ___|__|_/  |_   ____
+/    \\ |  |\\  \\/  /|  |\\   __\\_/ __ \\
+|  |  \\|  | >    < |  | |  |  \\  ___/
+|__|  /|__|/__/\\_ \\|__| |__|   \\___  >
+    \\/           \\/                \\/`
 ---
 
 <html lang="en">
@@ -81,14 +87,11 @@ import GithubIcon from "@lucide/astro/icons/github"
     </head>
 
     <body class="flex flex-col bg-black">
-        <header class="text-center py-2">
+        <header class="flex justify-center py-2">
             <pre
-                class="text-white font-medium font-mono text-xs mx-auto leading-none">.__         .__   __
-  ____  |__|___  ___|__|_/  |_   ____
-  /    \ |  |\  \/  /|  |\   __\_/ __ \
- |  |   \|  | &gt;    &lt; |  | |  |  \  ___/
-  |__|   /|__|/__/\_ \|__| |__|   \___  &gt;
-      \/           \/                \/</pre>
+                class="text-white font-medium font-mono text-xs mx-auto leading-none"
+                set:text={art}
+            />
         </header>
         <div
             class="flex flex-col flex-wrap max-h-180 mx-auto p-4 gap-4 overflow-x-scroll"
@@ -103,7 +106,7 @@ import GithubIcon from "@lucide/astro/icons/github"
                 ))
             }
         </div>
-        <div class="relative flex flex-col w-5xl mx-auto gap-2">
+        <div class="relative flex flex-col w-full max-w-5xl mx-auto gap-2 px-4">
             <p class="text-center text-sm text-neutral-400">
                 Download and run <Cmd value="bash ~/Downloads/nixite.sh" /> in your terminal.
                 Some installers may prompt for a password.
@@ -131,56 +134,52 @@ import GithubIcon from "@lucide/astro/icons/github"
         >
         </div>
         <div class="sticky bottom-0 inset-x-0 flex flex-col py-4 gap-2">
-            <div class="flex w-4xl mx-auto justify-end gap-2 flex-wrap">
+            <div class="flex mx-auto justify-end gap-2 flex-wrap">
                 <div
                     id="badge-paru"
-                    class="bg-neutral-700 rounded px-2 py-1 text-xs text-neutral-300"
+                    class="flex items-center gap-1 bg-neutral-700 rounded-md px-2 py-1 text-sm text-neutral-300"
                 >
+                    <InfoIcon class="size-4" />
                     paru will be installed
                 </div>
                 <div
                     id="badge-flatpak"
-                    class="bg-neutral-700 rounded px-2 py-1 text-xs text-neutral-300"
+                    class="flex items-center gap-1 bg-neutral-700 rounded-md px-2 py-1 text-sm text-neutral-300"
                 >
+                    <InfoIcon class="size-4" />
                     flatpak will be installed
                 </div>
                 <div
                     id="badge-rpmfusion"
-                    class="bg-neutral-700 rounded px-2 py-1 text-xs text-neutral-300"
+                    class="flex items-center gap-1 bg-neutral-700 rounded-md px-2 py-1 text-sm text-neutral-300"
                 >
+                    <InfoIcon class="size-4" />
                     rpmfusion will be installed
                 </div>
             </div>
             <div
-                class="flex items-center w-4xl mx-auto border-[1.5px] border-neutral-800 shadow-xl bg-neutral-900 rounded-xl p-1 gap-1"
+                class="flex items-center mx-auto border-[1.5px] border-neutral-800 shadow-xl bg-neutral-900 rounded-xl p-1 gap-1"
             >
-                <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://github.com/aspizu/nixite"
-                    class="flex mx-2 items-center gap-1 text-neutral-200 hover:text-white transition-colors text-sm"
+                <Tooltip text="Star on GitHub">
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://github.com/aspizu/nixite"
+                        class="flex mx-2 items-center gap-1 text-neutral-200 hover:text-white transition-colors text-sm"
+                    >
+                        <GithubIcon class="size-4" />
+                    </a>
+                </Tooltip>
+                <Tooltip text="Homepage">
+                    <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="/"
+                        class="flex mx-2 items-center gap-1 text-neutral-200 hover:text-white transition-colors text-sm"
+                    >
+                        <HeartIcon class="size-4" />
+                    </a></Tooltip
                 >
-                    <InfoIcon class="size-4" />
-                    Docs
-                </a>
-                <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="https://github.com/aspizu/nixite"
-                    class="flex mx-2 items-center gap-1 text-neutral-200 hover:text-white transition-colors text-sm"
-                >
-                    <GithubIcon class="size-4" />
-                    GitHub
-                </a>
-                <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href="/"
-                    class="flex mx-2 items-center gap-1 text-neutral-200 hover:text-white transition-colors text-sm"
-                >
-                    <HeartIcon class="size-4" />
-                    Homepage
-                </a>
                 <div class="mx-auto"></div>
                 <span class="mr-3 flex gap-2 text-neutral-400 items-center text-sm"
                     ><kbd class="bg-neutral-700 rounded px-2 text-xs">A</kbd>select
