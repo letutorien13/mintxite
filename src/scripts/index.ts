@@ -36,8 +36,22 @@ function renderPreview(): void {
 }
 
 function renderBadges(): void {
-    pkgElements.forEach(({id}) => {
+    pkgElements.forEach(({id, element}) => {
         const pkg = nixite.registry[id][distroSelect.value]
+        const tooltipTextElement = element.parentElement?.querySelector(
+            ".tooltip-text",
+        ) as HTMLElement
+        if (
+            pkg.install_command &&
+            (/\b(curl|wget)\b.*\b(bash|sh)\b/.test(pkg.install_command) ||
+                /\b(bash|sh)\s+\<\(curl\b/.test(pkg.install_command) ||
+                /\b(bash|sh)\s+-c\s+\"\$\(curl\b/.test(pkg.install_command))
+        ) {
+            tooltipTextElement.textContent = "3rd-party installer script"
+        }
+        if (pkg.install_command && /\b\/etc\/apt\/sources.list\b/) {
+            tooltipTextElement.textContent = "3rd-party repository"
+        }
     })
 }
 
@@ -65,7 +79,22 @@ function toggleDefaultPackages(): void {
 }
 
 function handleKeyPress(event: KeyboardEvent): void {
-    if (event.key === "a") toggleDefaultPackages()
+    // Ignore if user is typing in input fields
+    if (
+        event.target instanceof HTMLInputElement ||
+        event.target instanceof HTMLTextAreaElement
+    ) {
+        return
+    }
+
+    switch (event.key.toLowerCase()) {
+        case "a":
+            toggleDefaultPackages()
+            break
+        case "d":
+            installBtn.click()
+            break
+    }
 }
 
 function handleCheckboxInput(): void {

@@ -2,7 +2,7 @@
 
 @theme {
     --font-sans: "Figtree Variable", "sans-serif";
-    --font-mono: "Iosevka", "monospace";
+    --font-mono: "Fira Code Variable", "monospace";
 }
 
 :root {

@@ -12,6 +12,7 @@
     "dependencies": {
         "@astrojs/prism": "^3.3.0",
         "@fontsource-variable/figtree": "^5.2.10",
+        "@fontsource-variable/fira-code": "^5.2.7",
         "@fontsource/iosevka": "^5.2.5",
         "@lucide/astro": "^0.562.0",
         "@tailwindcss/vite": "^4.1.18",

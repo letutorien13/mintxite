@@ -1,12 +1,15 @@
 ---
 import "@fontsource-variable/figtree"
-import "@fontsource/iosevka"
+import "@fontsource-variable/fira-code"
 import DownloadIcon from "@lucide/astro/icons/download"
+import InfoIcon from "@lucide/astro/icons/info"
+import ChevronDownIcon from "@lucide/astro/icons/chevron-down"
 import HeartIcon from "@lucide/astro/icons/heart"
 import categories from "../categories.json"
 import Category from "../components/Category.astro"
 import Cmd from "../components/Cmd.astro"
 import Pkg from "../components/Pkg.astro"
+import Tooltip from "../components/Tooltip.astro"
 import "../styles/index.css"
 import "../styles/hljs.css"
 
@@ -122,29 +125,68 @@ import GithubIcon from "@lucide/astro/icons/github"
             <div
                 class="flex items-center w-4xl mx-auto border-[1.5px] border-neutral-800 shadow-xl bg-neutral-900 rounded-xl p-1 gap-1"
             >
-                <span class="mr-auto text-sm font-semibold">NIXITE</span>
-                <span class="mr-auto text-sm font-semibold">A -- toggle selection</span>
-                <select
-                    class="border-[1.5px] font-medium rounded-lg px-2 py-1 bg-neutral-800 border-neutral-700"
-                    id="distro"
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/aspizu/nixite"
+                    class="flex mx-2 items-center gap-1 text-neutral-200 hover:text-white transition-colors text-sm"
                 >
-                    <option value="ubuntu">Ubuntu Desktop</option>
-                    <option value="debian">Debian Stable</option>
-                    <option value="fedora">Fedora Workstation</option>
-                    <option value="arch">Arch Linux</option>
-                </select>
+                    <InfoIcon class="size-4" />
+                    Docs
+                </a>
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/aspizu/nixite"
+                    class="flex mx-2 items-center gap-1 text-neutral-200 hover:text-white transition-colors text-sm"
+                >
+                    <GithubIcon class="size-4" />
+                    GitHub
+                </a>
+                <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="/"
+                    class="flex mx-2 items-center gap-1 text-neutral-200 hover:text-white transition-colors text-sm"
+                >
+                    <HeartIcon class="size-4" />
+                    Homepage
+                </a>
+                <div class="mx-auto"></div>
+                <span class="mr-3 flex gap-2 text-neutral-400 items-center text-sm"
+                    ><kbd class="bg-neutral-700 rounded px-2 text-xs">A</kbd>select
+                    defaults</span
+                >
+                <span class="mr-3 flex gap-2 text-neutral-400 items-center text-sm"
+                    ><kbd class="bg-neutral-700 rounded px-2 text-xs">D</kbd
+                    >download</span
+                >
+                <div class="relative flex items-center">
+                    <select
+                        class="peer appearance-none w-48 font-medium rounded-lg px-2 py-1 bg-neutral-700/75 shadow-sm focus:outline-offset-2"
+                        id="distro"
+                    >
+                        <option value="ubuntu">Ubuntu Desktop</option>
+                        <option value="debian">Debian Stable</option>
+                        <option value="fedora">Fedora Workstation</option>
+                        <option value="arch">Arch Linux</option>
+                    </select>
+                    <ChevronDownIcon
+                        class="absolute right-1.5 size-5 pointer-events-none peer-open:rotate-180"
+                    />
+                </div>
                 <button
                     id="install-btn"
                     type="button"
-                    class="flex items-center gap-1 px-2 py-1 bg-white hover:bg-white/90 transition-colors text-black rounded-lg"
+                    class="flex items-center gap-1 px-2 py-1 bg-white hover:bg-white/90 transition-colors text-black rounded-lg shadow-sm focus:outline-offset-2"
                 >
                     <DownloadIcon class="size-4" />
                     Download
                 </button>
+                <script>
+                    import "../scripts/index.ts"
+                </script>
             </div>
         </div>
-        <script>
-            import "../scripts/index.ts"
-        </script>
     </body>
 </html>

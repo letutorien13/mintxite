@@ -1,5 +1,6 @@
 ---
 import Checkbox from "./Checkbox.astro"
+import Tooltip from "./Tooltip.astro"
 
 interface Props {
     id: string
@@ -9,19 +10,21 @@ interface Props {
 const {id, name, default: isDefault} = Astro.props
 ---
 
-<label
-    class="Pkg flex items-center gap-2 px-2 py-1.5 hover:bg-white/10 select-none transition-colors has-checked:opacity-100 opacity-80 has-checked:bg-white/10 has-checked:hover:bg-white/20"
-    data-default={Boolean(isDefault)}
-    data-id={id}
->
-    <Checkbox />
-    <img
-        src={`icons/${id}.svg`}
-        width={24}
-        height={24}
-        alt={name}
-        onerror="this.src = 'icons/unknown.svg'"
-    />
-    <span class="flex-1">{name}</span>
-    {isDefault && <span class="text-xs text-white/60 mr-2">•</span>}
-</label>
+<Tooltip text="1st-party package">
+    <label
+        class="Pkg flex items-center gap-2 px-2 py-1.5 hover:bg-white/10 select-none has-checked:opacity-100 opacity-80 has-checked:bg-white/10 has-checked:hover:bg-white/20"
+        data-default={Boolean(isDefault)}
+        data-id={id}
+    >
+        <Checkbox />
+        <img
+            src={`icons/${id}.svg`}
+            width={24}
+            height={24}
+            alt={name}
+            onerror="this.src = 'icons/unknown.svg'"
+        />
+        <span class="flex-1">{name}</span>
+        {isDefault && <span class="text-xs text-white/60 mr-2">•</span>}
+    </label>
+</Tooltip>
