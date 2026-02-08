@@ -1,5 +1,5 @@
 <p align="center">
-    <strong><a href="https://aspiz.uk/nixite">open the app</a></strong>↗
+    <strong><a href="https://aspiz.uk/nixite">open the app</a></strong> ↗
 </p>
 <p align="center">
     <img src="public/og-image.png" alt="Screenshot">
