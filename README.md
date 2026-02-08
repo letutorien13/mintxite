@@ -1,13 +1,11 @@
-# Nixite
-
-> **★ Star the repo to support the project!**
-
-[![image](https://img.shields.io/github/license/aspizu/nixite)](https://github.com/aspizu/nixite/blob/main/LICENSE)
-[![Discord](https://img.shields.io/badge/Discord-%235865F2.svg?logo=discord&logoColor=white)](https://discord.gg/mKQqsJ6UtK)
-
-[**Open Nixite**](https://aspiz.uk/nixite/)
-
-![Screenshot](public/screenshot.png)
+<p align="center">
+    <strong>
+    <a href="https://aspiz.uk/nixite">open the app ↗</a>
+    </strong>
+</p>
+<p align="center">
+    <img src="public/og-image.png" alt="Screenshot">
+</p>
 
 Nixite generates a bash script to unattendedly install all your Linux software.
 Nixite automatically configures your system and installs software using the best method available.
@@ -22,7 +20,7 @@ Inspired by [**Ninite**](https://Ninite.com/), [**PackagePicker**](https://Packa
 - Fedora Workstation
 - Arch Linux
 
-## Why not just use \<GNOME Software / Discover / …>?
+## Why not just use the system package manager?
 
 On Linux distributions such as Debian or Ubuntu, installing third-party (often proprietary) software isn’t always straightforward. It typically requires several manual steps, such as adding official repositories to your `sources.list`, importing GPG keys, and configuring updates. In other words, you can’t always just run `sudo apt install google-chrome`.
 
