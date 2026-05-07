@@ -5,7 +5,8 @@ from pathlib import Path
 
 import tomllib
 
-distros = {"ubuntu", "debian", "fedora", "arch"}
+# Adapté pour Linux Mint uniquement
+distros = {"mint"}
 
 
 icon_names = {
@@ -31,7 +32,7 @@ registry = {}
 for pkg_path in registry_path.glob("*.toml"):
     with pkg_path.open("rb") as pkg_file:
         pkg = tomllib.load(pkg_file)
-        if "ubuntu" not in pkg:
+        if "mint" not in pkg:
             pkg = {dist_name: pkg for dist_name in distros}
         registry[pkg_path.stem] = pkg
         copy_icon_for_pkg(pkg_path.stem)
@@ -51,20 +52,20 @@ with open("src/registry.json", "w") as registry_file:
 for pkg_name, pkg in registry.items():
     if set(pkg.keys()) != distros:
         print(
-            f"Warning: {pkg_name} does not have instructions for every supported distro, missing: {', '.join(distros - set(pkg.keys()))}"
+            f"Attention : {pkg_name} ne dispose pas d'instructions pour la distribution supportée, manquant : {', '.join(distros - set(pkg.keys()))}"
         )
     for pkg in pkg.values():
         for dep_name in pkg.get("dependencies", []):
             if dep_name not in registry:
-                print(f"Warning: {pkg_name} depends on unknown package {dep_name}")
+                print(f"Attention : {pkg_name} dépend du paquet inconnu {dep_name}")
         if "curl" in pkg.get("install_command", ""):
             if "curl" not in pkg.get("dependencies", []):
                 print(
-                    f"Warning: {pkg_name} uses curl in install_command but does not list it as a dependency"
+                    f"Attention : {pkg_name} utilise curl dans install_command mais ne le liste pas comme dépendance"
                 )
         if "install_command" in pkg and "install_system" in pkg:
             print(
-                f"Warning: {pkg_name} has both install_command and install_system defined"
+                f"Attention : {pkg_name} a à la fois install_command et install_system définis"
             )
         if "flatpak" in pkg and "snap" in pkg:
-            print(f"Warning: {pkg_name} has both flatpak and snap defined")
+            print(f"Attention : {pkg_name} a à la fois flatpak et snap définis")
