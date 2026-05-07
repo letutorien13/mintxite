@@ -1,8 +1,9 @@
 import * as nixite from "./src/scripts/nixite.ts"
-const distro = process.argv[2]
+const distro = "mint"
 let selection = Object.keys(nixite.registry)
-if (process.argv[3] != "--all") {
-    selection = process.argv[3].split(",").map((s) => s.trim())
+if (Bun.argv[2] != "--all") {
+    selection = Bun.argv[2].split(",").map((s) => s.trim())
 }
 const script = nixite.createScript(distro, selection)
-await Bun.file("nixite.sh").write(script)
+await Bun.file("mintxite.sh").write(script)
+console.log("✅ Script mintxite.sh généré avec succès!")
