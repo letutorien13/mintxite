@@ -2,116 +2,42 @@ import argparse
 import httpx
 from bs4 import BeautifulSoup
 
-TIMEOUT = 30 # timeout of 30 secondes
+TIMEOUT = 30 # délai d'attente de 30 secondes
 
-W_COL = "\033[0;33m" # Warning color
-E_COL = "\033[0;31m" # Error color
-I_COL = "\033[0;32m" # Info color
-R_COL = "\033[0m" # Reset color
+W_COL = "\033[0;33m" # Couleur d'avertissement
+E_COL = "\033[0;31m" # Couleur d'erreur
+I_COL = "\033[0;32m" # Couleur d'info
+R_COL = "\033[0m" # Réinitialiser la couleur
 
-FOUND = f"{I_COL}True{R_COL}"
-NOT_FOUND = f"{W_COL}False{R_COL}"
+FOUND = f"{I_COL}Trouvé{R_COL}"
+NOT_FOUND = f"{W_COL}Non trouvé{R_COL}"
 
-def check_debian(package: str):
-    try:
-        res = httpx.get(f"https://packages.debian.org/trixie/{package}", timeout=TIMEOUT)
-        
-        res.raise_for_status()
-        
-        if "<p>No such package.</p>" in res.text:
-            return NOT_FOUND
-        return FOUND
-    
-    except httpx.ReadTimeout:
-        return f"{E_COL}Timeout reached: {TIMEOUT} second(s){R_COL}"
-    except httpx.HTTPStatusError as err:
-        if err.response.status_code == 404:
-            return NOT_FOUND
-        else:
-            return f"{E_COL}Error Status code: {err.response.status_code}{R_COL}"
-    except Exception as err:
-        return f"{E_COL}Error: {type(err).__name__}{R_COL}"    
-
-
-def check_ubuntu(package: str):
+def check_linux_mint(package: str):
+    """Vérifie si un paquet existe dans les dépôts Linux Mint (basés sur Ubuntu)"""
     try:
         res = httpx.get(f"https://packages.ubuntu.com/noble/{package}", timeout=TIMEOUT)
         
         res.raise_for_status()
         
-        if "<p>No such package.</p>" in res.text:
+        if "<p>No such package.</p>" in res.text or "No such package" in res.text:
             return NOT_FOUND
         return FOUND
-
+    
     except httpx.ReadTimeout:
-        return f"{E_COL}Timeout reached: {TIMEOUT} second(s){R_COL}"
+        return f"{E_COL}Délai d'attente dépassé : {TIMEOUT} seconde(s){R_COL}"
     except httpx.HTTPStatusError as err:
         if err.response.status_code == 404:
             return NOT_FOUND
         else:
-            return f"{E_COL}Error Status code: {err.response.status_code}{R_COL}"
+            return f"{E_COL}Erreur - Code de statut : {err.response.status_code}{R_COL}"
     except Exception as err:
-        return f"{E_COL}Error: {type(err).__name__}{R_COL}"
+        return f"{E_COL}Erreur : {type(err).__name__}{R_COL}"
 
 
-def check_fedora(package: str):
-    try:
-        res = httpx.get(
-            f"https://packages.fedoraproject.org/search?query={package}&releases=Fedora+42&start=0",
-            follow_redirects=True,
-            timeout=TIMEOUT
-        )
-
-        res.raise_for_status()
-        
-        html = BeautifulSoup(res.text, 'html.parser')
-        pkgs = html.select('a span')
-        pkgFound = NOT_FOUND
-        for pkg in pkgs:
-            if pkg.get_text().strip() == package:
-                pkgFound = FOUND
-        
-        return pkgFound
-    except httpx.ReadTimeout:
-        return f"{E_COL}Timeout reached: {TIMEOUT} second(s){R_COL}"        
-    except httpx.HTTPStatusError as err:
-        if err.response.status_code == 404:
-            return NOT_FOUND
-        else:
-            return f"{E_COL}Error Status code: {err.response.status_code}{R_COL}"
-    except Exception as err:
-        return f"{E_COL}Error: {type(err).__name__}{R_COL}"
-
-
-def check_archlinux(package: str, registry: str = "core"):
-    try:
-        res = httpx.get(
-            f"https://archlinux.org/packages/{registry}/x86_64/{package}",
-            follow_redirects=True,
-            timeout=TIMEOUT
-        )
-
-        res.raise_for_status()    
-
-        return FOUND
-    except httpx.ReadTimeout:
-        return f"{E_COL}Timeout reached: {TIMEOUT} second(s){R_COL}"
-    except httpx.HTTPStatusError as err:
-        if err.response.status_code == 404:
-            return NOT_FOUND
-        else:
-            return f"{E_COL}Error Status code: {err.response.status_code}{R_COL}"
-    except Exception as err:
-        return f"{E_COL}Error: {type(err).__name__}{R_COL}"
-
-
-argparser = argparse.ArgumentParser()
-argparser.add_argument("PACKAGE")
+argparser = argparse.ArgumentParser(description="Rechercher un paquet pour Linux Mint")
+argparser.add_argument("PAQUET", help="Nom du paquet à rechercher")
 args = argparser.parse_args()
-package: str = args.PACKAGE
+package: str = args.PAQUET
 
 
-print(f"Debian (trixie) [{check_debian(package)}]")
-print(f"Ubuntu (noble) [{check_ubuntu(package)}]")
-print(f"Fedora (42) [{check_fedora(package)}]")
-print(f"Arch Linux (x86_64) [{{ 'core': {check_archlinux(package, 'core')}, 'extra': {check_archlinux(package, 'extra')}, 'multilib': {check_archlinux(package, 'multilib')} }}]")
+print(f"Linux Mint (basé sur Ubuntu noble) [{check_linux_mint(package)}]")
