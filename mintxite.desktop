@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Mintxite
+Comment=Générateur de script d'installation pour Linux Mint
+Icon=system-software-install
+Categories=System;Utility;
+NoDisplay=true
