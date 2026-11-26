@@ -45,11 +45,6 @@ if [[ "$ID" != "linuxmint" ]]; then
     echo "Télécharge un nouveau script depuis Mintxite sur la machine cible."
     exit 1
 fi
-if [[ -z "\${UBUNTU_CODENAME:-}" ]]; then
-    echo "Linux Mint Debian Edition (LMDE) détectée."
-    echo "Mintxite vise Linux Mint basé sur Ubuntu, pas LMDE."
-    exit 1
-fi
 
 `
 

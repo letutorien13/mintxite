@@ -6,9 +6,7 @@ Mintxite génère un script bash pour installer une sélection de logiciels sous
 
 Tu coches les applications, tu télécharges `mintxite.sh`, puis tu le lances. Le script passe par `apt` ou Flatpak. Il n'utilise pas Snap : Linux Mint le bloque.
 
-C'est une adaptation de [Nixite](https://github.com/aspizu/nixite) d'[aspizu](https://github.com/aspizu). Les fiches d'installation viennent de ce projet. Quand la fiche Ubuntu passe par Snap, Mintxite reprend la méthode Debian (paquet `apt`, Flatpak ou installeur `.deb`).
-
-Linux Mint Debian Edition (LMDE) n'est pas prise en charge.
+C'est une adaptation de [Nixite](https://github.com/aspizu/nixite) d'[aspizu](https://github.com/aspizu). Les fiches d'installation viennent de ce projet. Quand la fiche Ubuntu passe par Snap, Mintxite installe le paquet `apt` ou le Flatpak.
 
 ## Utiliser le site
 
