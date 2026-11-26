@@ -1,3 +1,19 @@
+[mint]
+install_command = """
+case "${UBUNTU_CODENAME:-}" in
+    noble) UBUNTU_VERSION_ID=24.04 ;;
+    jammy) UBUNTU_VERSION_ID=22.04 ;;
+    focal) UBUNTU_VERSION_ID=20.04 ;;
+    resolute) UBUNTU_VERSION_ID=26.04 ;;
+    *) echo "Version Ubuntu de base non reconnue : ${UBUNTU_CODENAME:-inconnue}" >&2; exit 1 ;;
+esac
+wget -q "https://packages.microsoft.com/config/ubuntu/${UBUNTU_VERSION_ID}/packages-microsoft-prod.deb"
+sudo apt-get install -y ./packages-microsoft-prod.deb
+rm -f ./packages-microsoft-prod.deb
+sudo apt-get update
+sudo apt-get install -y powershell
+"""
+
 [debian]
 install_command = "wget -q https://packages.microsoft.com/config/debian/$VERSION_ID/packages-microsoft-prod.deb\nsudo apt -y install ./packages-microsoft-prod.deb\nrm -f ./packages-microsoft-prod.deb\nsudo apt update -y\nsudo apt install -y powershell"
 

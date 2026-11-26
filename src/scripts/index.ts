@@ -84,12 +84,12 @@ function renderBadges(): void {
             test?: () => any
         }[] = [
             {
-                tooltip: "Not supported",
+                tooltip: "Pas disponible",
                 field: "install_command",
                 patterns: [/\bexit 1\b/],
             },
             {
-                tooltip: "3rd-party installer script",
+                tooltip: "Script d'installation tiers",
                 field: "install_command",
                 patterns: [
                     /\b(curl|wget)\b.*\|\s*(bash|sh)\b/,
@@ -99,12 +99,12 @@ function renderBadges(): void {
                 ],
             },
             {
-                tooltip: "RPMFusion repository",
+                tooltip: "Dépôt RPM Fusion",
                 field: "dependencies",
                 patterns: [/\brpmfusion\b/],
             },
             {
-                tooltip: "3rd-party repository",
+                tooltip: "Dépôt tiers",
                 field: "install_command",
                 patterns: [
                     /\b\/etc\/apt\/sources\.list\b/,
@@ -122,7 +122,7 @@ function renderBadges(): void {
                 ],
             },
             {
-                tooltip: "Direct package download",
+                tooltip: "Téléchargement direct",
                 field: "install_command",
                 patterns: [
                     /\.deb.*\s+&&\s+.*apt/,
@@ -132,22 +132,22 @@ function renderBadges(): void {
                 ],
             },
             {
-                tooltip: "Flatpak package",
+                tooltip: "Paquet Flatpak",
                 field: "flatpak",
                 test: () => pkg.flatpak === true,
             },
             {
-                tooltip: "Snap package",
+                tooltip: "Paquet Snap",
                 field: "snap",
                 test: () => pkg.snap === true || pkg.snap === "classic",
             },
             {
-                tooltip: "PPA repository",
+                tooltip: "Dépôt PPA",
                 field: "install_command",
                 patterns: [/\badd-apt-repository\s+ppa:/i],
             },
             {
-                tooltip: "GitHub release",
+                tooltip: "Version GitHub",
                 field: "install_command",
                 patterns: [
                     /github\.com.*\/releases\/.*\.(deb|rpm)/,
@@ -156,7 +156,7 @@ function renderBadges(): void {
                 ],
             },
             {
-                tooltip: "COPR repository",
+                tooltip: "Dépôt COPR",
                 field: "install_command",
                 patterns: [/\bcopr\s+enable\b/],
             },
@@ -198,7 +198,7 @@ function render(): void {
 function handleInstall(): void {
     const script = generateScript()
     const blob = new Blob([script], {type: "text/plain;charset=utf-8"})
-    saveAs(blob, "nixite.sh")
+    saveAs(blob, "mintxite.sh")
 }
 
 function toggleDefaultPackages(): void {

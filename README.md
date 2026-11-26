@@ -1,59 +1,67 @@
 <p align="center">
-    <strong><a href="https://aspiz.uk/nixite">open the app</a></strong> ↗
-</p>
-<p align="center">
-    <img src="public/og-image.png" alt="Screenshot">
+    <strong><a href="https://letutorien13.github.io/mintxite/">ouvrir l'application</a></strong>
 </p>
 
-Nixite generates a bash script to unattendedly install all your Linux software.
-Nixite automatically configures your system and installs software using the best method available.
-Nixite tries to suppress confirmation prompts.
+Mintxite génère un script bash pour installer une sélection de logiciels sous **Linux Mint** (édition basée sur Ubuntu).
 
-Inspired by [**Ninite**](https://Ninite.com/), [**PackagePicker**](https://PackagePicker.co/), [**TuxMate**](https://tuxmate.com/)
+Tu coches les applications, tu télécharges `mintxite.sh`, puis tu le lances. Le script passe par `apt` ou Flatpak. Il n'utilise pas Snap : Linux Mint le bloque.
 
-### Nixite supports the following Linux distributions:
+C'est une adaptation de [Nixite](https://github.com/aspizu/nixite) d'[aspizu](https://github.com/aspizu). Les fiches d'installation viennent de ce projet. Quand la fiche Ubuntu passe par Snap, Mintxite reprend la méthode Debian (paquet `apt`, Flatpak ou installeur `.deb`).
 
-- Debian Stable
-- Ubuntu Desktop
-- Fedora Workstation
-- Arch Linux
+Linux Mint Debian Edition (LMDE) n'est pas prise en charge.
 
-## Why not just use the system package manager?
+## Utiliser le site
 
-On Linux distributions such as Debian or Ubuntu, installing third-party (often proprietary) software isn’t always straightforward. It typically requires several manual steps, such as adding official repositories to your `sources.list`, importing GPG keys, and configuring updates. In other words, you can’t always just run `sudo apt install google-chrome`.
-
-In addition, many development toolchains deliberately avoid system package managers and instead provide their own installation methods. For example, Rust is best installed using `rustup`, which not only manages the compiler itself but also keeps toolchains and dependencies up to date. These custom installers are generally more reliable for keeping third-party software current than relying on distribution-provided packages.
-
-## Contributing
-
-To add a new package, create a file `app_name.toml` inside `registry/`
-
-You can add common instructions for all distros, or separate instructions for each distro.
-
-```toml
-install_system = "package_name" # uses apt on Ubuntu, pacman on Arch Linux
-```
-
-```toml
-[ubuntu]
-install_system = "package_name_on_apt"
-
-[arch]
-install_system = "package_name_on_pacman"
-```
-
-Use `search_pkgs.py` to find package names on various Linux distro repositories.
-
-Install Papirus icon theme and run:
+1. Ouvre [letutorien13.github.io/mintxite](https://letutorien13.github.io/mintxite/).
+2. Coche les logiciels. La touche `A` sélectionne les suggestions, `D` télécharge.
+3. Sur le Mint cible :
 
 ```shell
-python registry.py && prettier -uwu src/*.json
+bash ~/Downloads/mintxite.sh
 ```
 
-`flatpak = true` to install using flatpak, `install_system` should be the flathub package name.
-`snap = "classic"` or `snap = true` to install using Snap. `install_system` should be the snap name.
+Le mot de passe administrateur peut être demandé. Le script s'arrête si la machine n'est pas un Linux Mint basé sur Ubuntu.
 
-`install_command = "bash command here..."` for custom installers.
-When using this, add a `skip_if_exists = "filepath"` to prevent the installer from running again.
+## Générer un script en local
 
-Add the package entry `<Pkg id="app-name" name="App Name" />` in `src/pages/index.astro`
+```shell
+python3 registry.py
+bun nixite-cli.ts firefox,vlc,git
+bash mintxite.sh
+```
+
+Sans argument, ou avec `--all`, la commande écrit un script pour toute la liste, y compris des paquets internes (dépôts). Pour une installation normale, passe les noms séparés par des virgules, ou utilise le site.
+
+Lancer l'interface en local :
+
+```shell
+bun install
+bun run dev
+```
+
+Le site de développement est servi sous `/mintxite/`.
+
+## Ajouter un logiciel
+
+Crée `registry/nom.toml`. Une section `[mint]` est utilisée telle quelle. Sinon Mintxite reprend `[ubuntu]`, puis `[debian]` si la fiche Ubuntu est absente ou limitée à Snap.
+
+```toml
+[mint]
+install_system = "nom-du-paquet"
+```
+
+```toml
+[mint]
+install_system = "org.exemple.App"
+flatpak = true
+```
+
+`install_command` reçoit des commandes bash. Ajoute `skip_if_exists` pour ne pas relancer un installeur déjà en place. Si la commande utilise `curl`, ajoute `curl` dans `dependencies`.
+
+Puis ajoute la ligne dans `src/categories.json` et régénère :
+
+```shell
+python3 registry.py
+```
+
+`search_pkgs.py nom` vérifie si le paquet existe dans Ubuntu noble, la base de Linux Mint 22.

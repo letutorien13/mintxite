@@ -18,6 +18,6 @@ cat <<'EOF'
             \/           \/                \/
 EOF
 
-echo -e "${BLUE}    Sit back while we install your linux software"
-echo -e "${RESET}Report bugs to ${CYAN}${UNDERLINE}https://github.com/aspizu/nixite/issues${NO_UNDERLINE}${RESET}"
+echo -e "${BLUE}    Installation des logiciels choisis sous Linux Mint"
+echo -e "${RESET}Mintxite, d'après Nixite. Un problème : ${CYAN}${UNDERLINE}https://github.com/letutorien13/mintxite/issues${NO_UNDERLINE}${RESET}"
 echo

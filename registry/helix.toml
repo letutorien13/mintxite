@@ -1,3 +1,12 @@
+[mint]
+install_command = """
+if apt-cache show helix >/dev/null 2>&1; then
+    sudo apt-get install -y helix
+else
+    install_flatpak com.helix_editor.Helix
+fi
+"""
+
 [ubuntu]
 install_system = "helix"
 snap = "classic"

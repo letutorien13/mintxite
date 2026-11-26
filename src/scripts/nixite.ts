@@ -35,14 +35,19 @@ export function createScript(distro: string, selection: string[]) {
     let s = hooks.common
 
     s += `
-if [[ -f /etc/os-release ]]; then
-    source /etc/os-release
-    if [[ "$ID" != "${distro}" ]]; then
-        echo "This script was designed to run on ${distro}, but the current system is running $ID, select $ID in Nixite and download again."
-        exit 1
-    fi
-else
-    echo "File not found: /etc/os-release, are you running Linux?"
+if [[ ! -f /etc/os-release ]]; then
+    echo "Fichier introuvable : /etc/os-release. Ce script vise Linux Mint."
+    exit 1
+fi
+source /etc/os-release
+if [[ "$ID" != "linuxmint" ]]; then
+    echo "Ce script est prévu pour Linux Mint, mais ce système annonce \$ID."
+    echo "Télécharge un nouveau script depuis Mintxite sur la machine cible."
+    exit 1
+fi
+if [[ -z "\${UBUNTU_CODENAME:-}" ]]; then
+    echo "Linux Mint Debian Edition (LMDE) détectée."
+    echo "Mintxite vise Linux Mint basé sur Ubuntu, pas LMDE."
     exit 1
 fi
 

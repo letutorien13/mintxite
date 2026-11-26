@@ -4,12 +4,14 @@
     "version": "1.0.0",
     "description": "Générateur de script d'installation automatique pour Linux Mint",
     "scripts": {
+        "predev": "python3 registry.py",
+        "prebuild": "python3 registry.py",
         "dev": "astro dev",
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
         "fmt": "prettier -uwu .",
-        "generate": "bun nixite-cli.ts --all"
+        "generate": "python3 registry.py && bun nixite-cli.ts --all"
     },
     "dependencies": {
         "@astrojs/prism": "^3.3.0",

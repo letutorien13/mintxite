@@ -1,3 +1,6 @@
+[mint]
+install_command = "echo \"Notion n'a pas de paquet officiel pour Linux Mint.\""
+
 [ubuntu]
 install_command = "echo \"Notion is not available on Ubuntu.\""
 

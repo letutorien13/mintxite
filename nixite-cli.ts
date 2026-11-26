@@ -1,9 +1,22 @@
+import {writeFileSync} from "node:fs"
 import * as nixite from "./src/scripts/nixite.ts"
-const distro = "mint"
+
+const argv: string[] = typeof Bun !== "undefined" ? Bun.argv : process.argv
+const arg = argv[2]
 let selection = Object.keys(nixite.registry)
-if (Bun.argv[2] != "--all") {
-    selection = Bun.argv[2].split(",").map((s) => s.trim())
+if (arg && arg !== "--all") {
+    selection = arg
+        .split(",")
+        .map((name) => name.trim())
+        .filter(Boolean)
 }
-const script = nixite.createScript(distro, selection)
-await Bun.file("mintxite.sh").write(script)
-console.log("✅ Script mintxite.sh généré avec succès!")
+
+const unknown = selection.filter((name) => !nixite.registry[name])
+if (unknown.length) {
+    console.error(`Paquet inconnu : ${unknown.join(", ")}`)
+    process.exit(1)
+}
+
+const script = nixite.createScript("mint", selection)
+writeFileSync("mintxite.sh", script)
+console.log(`Script mintxite.sh généré (${selection.length} entrée${selection.length > 1 ? "s" : ""}).`)

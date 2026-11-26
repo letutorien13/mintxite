@@ -1,6 +1,6 @@
 [
     {
-        "name": "Web Browsers",
+        "name": "Navigateurs",
         "packages": [
             {"id": "firefox", "name": "Firefox"},
             {"id": "google-chrome", "name": "Google Chrome", "default": true},
@@ -22,7 +22,7 @@
         ]
     },
     {
-        "name": "Media & Entertainment",
+        "name": "Médias",
         "packages": [
             {"id": "spotify", "name": "Spotify"},
             {"id": "strawberry", "name": "Strawberry"},
@@ -31,7 +31,7 @@
         ]
     },
     {
-        "name": "File Sharing",
+        "name": "Partage de fichiers",
         "packages": [
             {"id": "nicotine-plus", "name": "Nicotine+", "default": true},
             {"id": "localsend", "name": "LocalSend"},
@@ -39,7 +39,7 @@
         ]
     },
     {
-        "name": "Gaming",
+        "name": "Jeux",
         "packages": [
             {"id": "retroarch", "name": "RetroArch", "default": true},
             {"id": "steam", "name": "Steam"},
@@ -50,7 +50,7 @@
         ]
     },
     {
-        "name": "Graphics & Design",
+        "name": "Graphisme",
         "packages": [
             {"id": "gimp", "name": "GIMP", "default": true},
             {"id": "inkscape", "name": "Inkscape", "default": true},
@@ -58,7 +58,7 @@
         ]
     },
     {
-        "name": "Office & Productivity",
+        "name": "Bureautique",
         "packages": [
             {"id": "libreoffice", "name": "LibreOffice"},
             {"id": "notion", "name": "Notion"},
@@ -78,7 +78,7 @@
         ]
     },
     {
-        "name": "Development Tools",
+        "name": "Développement",
         "packages": [
             {"id": "bun", "name": "Bun", "default": true},
             {"id": "git", "name": "Git", "default": true},
@@ -94,7 +94,7 @@
         ]
     },
     {
-        "name": "Utilities",
+        "name": "Utilitaires",
         "packages": [
             {"id": "proton-vpn", "name": "Proton VPN", "default": true},
             {"id": "chezmoi", "name": "chezmoi", "default": true},
@@ -105,7 +105,7 @@
         ]
     },
     {
-        "name": "Terminal Emulators",
+        "name": "Terminaux",
         "packages": [
             {"id": "alacritty", "name": "Alacritty", "default": true},
             {"id": "foot", "name": "Foot"},
@@ -126,7 +126,7 @@
         ]
     },
     {
-        "name": "Engineering",
+        "name": "Ingénierie",
         "packages": [
             {"id": "kicad", "name": "KiCad"},
             {"id": "freecad", "name": "FreeCAD"},
